@@ -1,0 +1,69 @@
+<html>
+<head>
+<script type="text/javascript">
+function ajax (id) {
+
+var value = $('#' + id).val();
+$('#' + id).after('<div class="loading"></div>');
+
+if (id === 'email') {
+
+    $.post('http://www.example.com/ajax.php', {email: value},
+
+    function (response) {
+        $('#email_error, #email_success').hide();
+        setTimeout(function(){
+            $('.loading').hide();
+                finish_ajax (id, response);
+        }, 1000);
+    });
+}
+
+if (id === 'password') {
+
+    $.post('http://www.example.com/ajax.php', {password: value},
+
+    function (response) {
+        $('#password_error, #password_success').hide();
+        setTimeout(function(){
+            $('.loading').hide();
+                finish_ajax (id, response);
+        }, 1000);
+    });
+}
+
+if (id === 'username') {
+
+    $.post('http://www.example.com/ajax.php', {username: value},
+
+    function (response) {
+        $('#username_error, #username_success').hide();
+        setTimeout(function(){
+            $('.loading').hide();
+                finish_ajax (id, response);
+        }, 1000);
+    });
+} 
+
+return false;
+}
+
+function finish_ajax (id, response) {
+
+$('#' + id).after(response).fadeIn(2000);
+} 
+</script>
+</head>
+<form action="#" method="post">
+<fieldset>
+<legend>Login Details</legend>
+<label>Your Email:</label><input id="email" name="email" type="text" onblur="return ajax ('email');" />
+<label>Password:</label><input id="password" name="password" type="text" onblur="return ajax ('password');" />
+</fieldset>
+<fieldset>
+<legend>Account Details</legend>
+<label>Your Username:</label><input id="username" name="username" type="text" onblur="return ajax ('username');" />
+</fieldset>
+
+<input class="submit" type="submit" value="Create Account" />
+</form>
